@@ -1,0 +1,44 @@
+{
+  "name": "carwebproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel public/js -d dist"
+  },
+  "author": "hkj",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "await-fs": "^1.0.0",
+    "blueimp-md5": "^2.12.0",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.3.1",
+    "co-mysql": "^1.0.0",
+    "ejs": "^2.7.1",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.4.1",
+    "koa": "^2.10.0",
+    "koa-better-body": "^3.1.13",
+    "koa-body": "^4.1.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-ejs": "^4.2.0",
+    "koa-multer": "^1.0.2",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.12.3",
+    "koa-static": "^5.0.0",
+    "mysql": "^2.17.1",
+    "svg-captcha": "^1.4.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
+  },
+  "dependencies": {
+    "@alicloud/sms-sdk": "^1.1.6",
+    "layui-src": "^2.5.5",
+    "nodemailer": "^6.4.2",
+    "nodemailer-smtp-transport": "^2.7.4"
+  }
+}

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="gbk" collation="gbk_chinese_ci">car_project</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="admin" view="colnames">
+<left>0</left>
+<top>0</top>
+<width>100</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `account` varchar(10) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=gbk</sql_create_table>
+</table>
+<table name="goods" view="colnames">
+<left>222</left>
+<top>110</top>
+<width>140</width>
+<height>248</height>
+<sql_create_table>CREATE TABLE `goods` (
+  `good_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品编号',
+  `good_class_id` int(11) NOT NULL COMMENT '商品分类编号',
+  `goods_brand_id` int(11) NOT NULL,
+  `good_name` varchar(100) NOT NULL COMMENT '商品名称',
+  `good_price` float NOT NULL COMMENT '商品价格',
+  `good_inventory` int(11) NOT NULL COMMENT '商品库存',
+  `good_product` text NOT NULL,
+  `good_img_src` text NOT NULL,
+  `good_sales` int(11) NOT NULL COMMENT '已销售数量',
+  `good_evaluation` int(11) NOT NULL COMMENT '已评价数量',
+  PRIMARY KEY (`good_id`),
+  KEY `FK_goods_brand_id` (`goods_brand_id`),
+  KEY `FK_goods_class_id_2` (`good_class_id`),
+  CONSTRAINT `FK_goods_brand_id` FOREIGN KEY (`goods_brand_id`) REFERENCES `goods_brand` (`goods_brand_id`),
+  CONSTRAINT `FK_goods_class_id_2` FOREIGN KEY (`good_class_id`) REFERENCES `goods_class` (`class_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=gbk</sql_create_table>
+</table>
+<table name="goods_brand" view="colnames">
+<left>34</left>
+<top>410</top>
+<width>172</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `goods_brand` (
+  `goods_brand_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品品牌编号',
+  `goods_brand_name` varchar(20) NOT NULL COMMENT '商品品牌名称',
+  `goods_brand_img_src` varchar(100) NOT NULL COMMENT '商品品牌图片路径',
+  PRIMARY KEY (`goods_brand_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=gbk</sql_create_table>
+</table>
+<table name="goods_class" view="colnames">
+<left>406</left>
+<top>7</top>
+<width>113</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `goods_class` (
+  `class_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品分类编号',
+  `class_name` varchar(50) NOT NULL COMMENT '商品分类名称',
+  PRIMARY KEY (`class_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=gbk</sql_create_table>
+</table>
+<table name="order" view="colnames">
+<left>460</left>
+<top>382</top>
+<width>118</width>
+<height>214</height>
+<sql_create_table>CREATE TABLE `order` (
+  `order_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '订单编号',
+  `user_id` int(11) NOT NULL COMMENT '用户编号',
+  `goods_id` int(11) NOT NULL COMMENT '商品编号',
+  `iphone` varchar(12) DEFAULT NULL COMMENT '联系方式',
+  `address` varchar(200) DEFAULT NULL COMMENT '地址',
+  `price` float(6,2) DEFAULT NULL COMMENT '订单总金额',
+  `order_time` datetime DEFAULT NULL COMMENT '下单时间',
+  `order_status` char(2) DEFAULT NULL COMMENT '订单状态： 0 = 待发货 1=已发货 2=派送中 3=已收货 4 = 待评价 5 = 已评价 6 = 已退款',
+  PRIMARY KEY (`order_id`),
+  KEY `FK_user_order_id` (`user_id`),
+  KEY `FK_goods_order_id` (`goods_id`),
+  CONSTRAINT `FK_goods_order_id` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`good_id`),
+  CONSTRAINT `FK_user_order_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=gbk</sql_create_table>
+</table>
+<table name="user" view="colnames">
+<left>737</left>
+<top>389</top>
+<width>103</width>
+<height>180</height>
+<sql_create_table>CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户编号',
+  `username` varchar(20) NOT NULL COMMENT '用户昵称',
+  `password` varchar(20) NOT NULL COMMENT '用户密码',
+  `email` varchar(30) NOT NULL,
+  `brithday` date DEFAULT NULL COMMENT '生日',
+  `sex` char(2) DEFAULT '2' COMMENT '0 = 男 1 = 女 2 = 保密',
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=gbk</sql_create_table>
+</table>
+<table name="user_collection_of_goods" view="colnames">
+<left>963</left>
+<top>22</top>
+<width>157</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `user_collection_of_goods` (
+  `collection_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '收藏夹编号',
+  `user_collection_id` int(11) NOT NULL COMMENT '用户编号',
+  `goods_collection_id` int(11) NOT NULL COMMENT '商品编号',
+  PRIMARY KEY (`collection_id`),
+  KEY `FK_collection_user_id` (`user_collection_id`),
+  KEY `FK_collection_goods_id` (`goods_collection_id`),
+  CONSTRAINT `FK_collection_goods_id` FOREIGN KEY (`goods_collection_id`) REFERENCES `goods` (`good_id`),
+  CONSTRAINT `FK_collection_user_id` FOREIGN KEY (`user_collection_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=gbk</sql_create_table>
+</table>
+<table name="user_evaluation_of_goods" view="colnames">
+<left>967</left>
+<top>254</top>
+<width>163</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `user_evaluation_of_goods` (
+  `evaluation_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '评价编号',
+  `user_evaluation_id` int(11) NOT NULL COMMENT '用户编号',
+  `goods_evaluation_id` int(11) NOT NULL COMMENT '商品编号',
+  PRIMARY KEY (`evaluation_id`),
+  KEY `FK_evaluation_user_id` (`user_evaluation_id`),
+  KEY `FK_evaluation_goods_id` (`goods_evaluation_id`),
+  CONSTRAINT `FK_evaluation_goods_id` FOREIGN KEY (`goods_evaluation_id`) REFERENCES `goods` (`good_id`),
+  CONSTRAINT `FK_evaluation_user_id` FOREIGN KEY (`user_evaluation_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=gbk</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
