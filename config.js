@@ -44,8 +44,8 @@ module.exports = {
 
     //短信验证接口AccessKeyId，SecretAccessKey
     SMS : {
-        AccessKeyId : 'LTAI4FfBw17jJsZGqNsyxTUa',
-        SecretAccessKey : 'M6Mo3bIhkQIqESHocwEf3urS3Bqcee',
+        AccessKeyId : 'LTAI4FfBw17jJsZGqNsyxTUa_huang',
+        SecretAccessKey : 'M6Mo3bIhkQIqESHocwEf3urS3Bqcee_huang',
         SignName : '自行车销售商城', /* 短信签名-可在短信控制台中找到 */
         TemplateCode : {
             RegisterTemplate : 'SMS_182674875',
